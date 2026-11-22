@@ -1,0 +1,232 @@
+[
+  {
+    "test_id": "TC-001",
+    "complexity": "simple",
+    "query": "Я пробіг 10 км за 50:00. Який у мене був темп?",
+    "expected": "Темп 5:00 хв/км (швидкість 12 км/год). Один виклик calculate_pace.",
+    "actual": "Ваш темп становив 5:00 хв/км, а середня швидкість — 12.0 км/год.",
+    "confidence": 1.0,
+    "sources": [
+      "calculate_pace"
+    ],
+    "status": "success",
+    "steps": 2,
+    "tool_calls": [
+      "calculate_pace"
+    ],
+    "tool_calls_detailed": [
+      {
+        "name": "calculate_pace",
+        "args": {
+          "distance_km": 10,
+          "time": "50:00"
+        }
+      }
+    ],
+    "elapsed_ms": 3480,
+    "stop_reason": null,
+    "max_steps_reached": false,
+    "timeout_reached": false,
+    "loop_detected": false,
+    "checks": {
+      "expected_tools": [
+        "calculate_pace"
+      ],
+      "tools_ok": true,
+      "missing_facts": [],
+      "forbidden_facts_found": []
+    }
+  },
+  {
+    "test_id": "TC-002",
+    "complexity": "medium",
+    "query": "Я пробіг 5 км за 25:00, а мій друг — 10 км за 55:00. У кого з нас вищий темп і на скільки секунд на кілометр?",
+    "expected": "Мій темп 5:00 хв/км, у друга 5:30 хв/км; я швидший на 30 с/км. Два виклики calculate_pace.",
+    "actual": "Ваш темп на 5 км становить 5:00 хв/км, а темп вашого друга на 10 км — 5:30 хв/км. Ви бігли швидше на 30 секунд на кілометр.",
+    "confidence": 1.0,
+    "sources": [
+      "calculate_pace"
+    ],
+    "status": "success",
+    "steps": 2,
+    "tool_calls": [
+      "calculate_pace",
+      "calculate_pace"
+    ],
+    "tool_calls_detailed": [
+      {
+        "name": "calculate_pace",
+        "args": {
+          "distance_km": 5,
+          "time": "25:00"
+        }
+      },
+      {
+        "name": "calculate_pace",
+        "args": {
+          "distance_km": 10,
+          "time": "55:00"
+        }
+      }
+    ],
+    "elapsed_ms": 5017,
+    "stop_reason": null,
+    "max_steps_reached": false,
+    "timeout_reached": false,
+    "loop_detected": false,
+    "checks": {
+      "expected_tools": [
+        "calculate_pace",
+        "calculate_pace"
+      ],
+      "tools_ok": true,
+      "missing_facts": [],
+      "forbidden_facts_found": []
+    }
+  },
+  {
+    "test_id": "TC-003",
+    "complexity": "complex",
+    "query": "Мені 30 років, вага 75 кг, пульс у спокої 60. Нещодавно я пробіг 10 км за 50:00. Хочу пробігти півмарафон: спрогнозуй мій час, скажи потрібний темп, підкажи пульсові зони і порахуй, скільки калорій я спалю за цей забіг.",
+    "expected": "Прогноз 1:50:19, темп 5:14 хв/км, макс. пульс 190 і п'ять зон (125–190 уд/хв), близько 1350 ккал. Потрібні predict_race_time, calculate_heart_rate_zones та estimate_calories; калорії залежать від прогнозованого часу, тому потрібно щонайменше дві ітерації.",
+    "actual": "Ось результати для вашого півмарафону:\n\n1. **Прогнозований час**: 1 година 50 хвилин 19 секунд (1:50:19).\n2. **Темп**: 5 хвилин 14 секунд на кілометр (5:14).\n3. **Пульсові зони**:\n   - Зона 1 (відновлення): 125 - 138 bpm\n   - Зона 2 (аеробна база): 138 - 151 bpm\n   - Зона 3 (темпова): 151 - 164 bpm\n   - Зона 4 (порогова): 164 - 177 bpm\n   - Зона 5 (максимальна): 177 - 190 bpm\n4. **Калорії, які ви спалите**: приблизно 1348 ккал за забіг.\n\nГотуйтеся до забігу!",
+    "confidence": 1.0,
+    "sources": [
+      "predict_race_time",
+      "calculate_heart_rate_zones",
+      "calculate_pace",
+      "estimate_calories"
+    ],
+    "status": "success",
+    "steps": 3,
+    "tool_calls": [
+      "predict_race_time",
+      "calculate_heart_rate_zones",
+      "calculate_pace",
+      "estimate_calories"
+    ],
+    "tool_calls_detailed": [
+      {
+        "name": "predict_race_time",
+        "args": {
+          "known_distance_km": 10,
+          "known_time": "50:00",
+          "target_distance_km": 21.0975
+        }
+      },
+      {
+        "name": "calculate_heart_rate_zones",
+        "args": {
+          "age": 30,
+          "resting_hr": 60
+        }
+      },
+      {
+        "name": "calculate_pace",
+        "args": {
+          "distance_km": 21.0975,
+          "time": "1:45:00"
+        }
+      },
+      {
+        "name": "estimate_calories",
+        "args": {
+          "activity": "running",
+          "weight_kg": 75,
+          "duration_minutes": 110
+        }
+      }
+    ],
+    "elapsed_ms": 10997,
+    "stop_reason": null,
+    "max_steps_reached": false,
+    "timeout_reached": false,
+    "loop_detected": false,
+    "checks": {
+      "expected_tools": [
+        "predict_race_time",
+        "calculate_heart_rate_zones",
+        "estimate_calories"
+      ],
+      "tools_ok": true,
+      "missing_facts": [],
+      "forbidden_facts_found": []
+    }
+  },
+  {
+    "test_id": "TC-004",
+    "complexity": "medium",
+    "query": "Мені 95 років, пульс у спокої 130. Порахуй пульсові зони.",
+    "expected": "Некоректні дані користувача: інструмент відхиляє пульс 130 (ValidationError: від 30 до 120). Агент пояснює помилку і не вигадує зони.",
+    "actual": "Пульс у спокої має бути в межах від 30 до 120 ударів за хвилину. Ваше значення (130) перевищує цю межу. Будь ласка, надайте коректний пульс у спокої.",
+    "confidence": 0.9,
+    "sources": [],
+    "status": "success",
+    "steps": 2,
+    "tool_calls": [
+      "calculate_heart_rate_zones"
+    ],
+    "tool_calls_detailed": [
+      {
+        "name": "calculate_heart_rate_zones",
+        "args": {
+          "age": 95,
+          "resting_hr": 130
+        }
+      }
+    ],
+    "elapsed_ms": 4529,
+    "stop_reason": null,
+    "max_steps_reached": false,
+    "timeout_reached": false,
+    "loop_detected": false,
+    "checks": {
+      "expected_tools": [
+        "calculate_heart_rate_zones"
+      ],
+      "tools_ok": true,
+      "missing_facts": [],
+      "forbidden_facts_found": []
+    }
+  },
+  {
+    "test_id": "TC-005",
+    "complexity": "edge",
+    "query": "Я пробіг півмарафон за 1:75:00. Який у мене був темп?",
+    "expected": "Час 1:75:00 некоректний (75 хвилин у форматі H:MM:SS). Агент має передати його в calculate_pace дослівно, отримати ValidationError і повідомити про помилку — а не підставляти інший час.",
+    "actual": "Ваш темп під час півмараону становив 3:33 хв/км, а середня швидкість — 16.88 км/год.",
+    "confidence": 0.9,
+    "sources": [
+      "calculate_pace"
+    ],
+    "status": "partial",
+    "steps": 2,
+    "tool_calls": [
+      "calculate_pace"
+    ],
+    "tool_calls_detailed": [
+      {
+        "name": "calculate_pace",
+        "args": {
+          "distance_km": 21.0975,
+          "time": "1:15:00"
+        }
+      }
+    ],
+    "elapsed_ms": 3578,
+    "stop_reason": null,
+    "max_steps_reached": false,
+    "timeout_reached": false,
+    "loop_detected": false,
+    "checks": {
+      "expected_tools": [
+        "calculate_pace"
+      ],
+      "tools_ok": true,
+      "missing_facts": [],
+      "forbidden_facts_found": [
+        "3:33"
+      ]
+    }
+  }
+]

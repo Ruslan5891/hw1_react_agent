@@ -1,0 +1,766 @@
+{
+  "total_runs": 8,
+  "runs": [
+    {
+      "run_id": "TC-001",
+      "query": "Я пробіг 10 км за 50:00. Який у мене був темп?",
+      "started_at": "2026-11-22T21:03:12.167065+00:00",
+      "total_steps": 4,
+      "total_time_ms": 3491,
+      "trajectory": [
+        {
+          "step_number": 1,
+          "node_name": "agent",
+          "input": "Я пробіг 10 км за 50:00. Який у мене був темп?",
+          "output": "tool calls: ['calculate_pace']",
+          "tool_calls": [
+            {
+              "name": "calculate_pace",
+              "args": {
+                "distance_km": 10,
+                "time": "50:00"
+              }
+            }
+          ],
+          "timestamp": "2026-11-22T21:03:13.188949+00:00",
+          "duration_ms": 1008,
+          "elapsed_ms": 1021,
+          "iteration": 1,
+          "total_tokens": 1477
+        },
+        {
+          "step_number": 2,
+          "node_name": "tools",
+          "input": "calculate_pace({'distance_km': 10, 'time': '50:00'})",
+          "output": "{\"distance_km\": 10.0, \"time\": \"0:50:00\", \"pace_per_km\": \"5:00\", \"pace_seconds_per_km\": 300.0, \"speed_kmh\": 12.0}",
+          "tool_calls": [
+            {
+              "name": "calculate_pace",
+              "args": {
+                "distance_km": 10,
+                "time": "50:00"
+              }
+            }
+          ],
+          "timestamp": "2026-11-22T21:03:13.192111+00:00",
+          "duration_ms": 1,
+          "elapsed_ms": 1025,
+          "status": "success"
+        },
+        {
+          "step_number": 3,
+          "node_name": "agent",
+          "input": "{\"distance_km\": 10.0, \"time\": \"0:50:00\", \"pace_per_km\": \"5:00\", \"pace_seconds_per_km\": 300.0, \"speed_kmh\": 12.0}",
+          "output": "Ваш темп становив 5:00 хв/км, а середня швидкість — 12.0 км/год.",
+          "tool_calls": [],
+          "timestamp": "2026-11-22T21:03:14.255129+00:00",
+          "duration_ms": 1062,
+          "elapsed_ms": 2088,
+          "iteration": 2,
+          "total_tokens": 1568
+        },
+        {
+          "step_number": 4,
+          "node_name": "formatter",
+          "input": "Ваш темп становив 5:00 хв/км, а середня швидкість — 12.0 км/год.",
+          "output": "{\"answer\": \"Ваш темп становив 5:00 хв/км, а середня швидкість — 12.0 км/год.\", \"confidence\": 1.0, \"sources\": [\"calculate_pace\"]}",
+          "tool_calls": [],
+          "timestamp": "2026-11-22T21:03:15.658360+00:00",
+          "duration_ms": 1402,
+          "elapsed_ms": 3491
+        }
+      ],
+      "stop_reason": null
+    },
+    {
+      "run_id": "TC-002",
+      "query": "Я пробіг 5 км за 25:00, а мій друг — 10 км за 55:00. У кого з нас вищий темп і на скільки секунд на кілометр?",
+      "started_at": "2026-11-22T21:03:15.660021+00:00",
+      "total_steps": 5,
+      "total_time_ms": 5024,
+      "trajectory": [
+        {
+          "step_number": 1,
+          "node_name": "agent",
+          "input": "Я пробіг 5 км за 25:00, а мій друг — 10 км за 55:00. У кого з нас вищий темп і на скільки секунд на кілометр?",
+          "output": "tool calls: ['calculate_pace', 'calculate_pace']",
+          "tool_calls": [
+            {
+              "name": "calculate_pace",
+              "args": {
+                "distance_km": 5,
+                "time": "25:00"
+              }
+            },
+            {
+              "name": "calculate_pace",
+              "args": {
+                "distance_km": 10,
+                "time": "55:00"
+              }
+            }
+          ],
+          "timestamp": "2026-11-22T21:03:17.302755+00:00",
+          "duration_ms": 1630,
+          "elapsed_ms": 1642,
+          "iteration": 1,
+          "total_tokens": 1543
+        },
+        {
+          "step_number": 2,
+          "node_name": "tools",
+          "input": "calculate_pace({'distance_km': 5, 'time': '25:00'})",
+          "output": "{\"distance_km\": 5.0, \"time\": \"0:25:00\", \"pace_per_km\": \"5:00\", \"pace_seconds_per_km\": 300.0, \"speed_kmh\": 12.0}",
+          "tool_calls": [
+            {
+              "name": "calculate_pace",
+              "args": {
+                "distance_km": 5,
+                "time": "25:00"
+              }
+            }
+          ],
+          "timestamp": "2026-11-22T21:03:17.304287+00:00",
+          "duration_ms": 0,
+          "elapsed_ms": 1644,
+          "status": "success"
+        },
+        {
+          "step_number": 3,
+          "node_name": "tools",
+          "input": "calculate_pace({'distance_km': 10, 'time': '55:00'})",
+          "output": "{\"distance_km\": 10.0, \"time\": \"0:55:00\", \"pace_per_km\": \"5:30\", \"pace_seconds_per_km\": 330.0, \"speed_kmh\": 10.91}",
+          "tool_calls": [
+            {
+              "name": "calculate_pace",
+              "args": {
+                "distance_km": 10,
+                "time": "55:00"
+              }
+            }
+          ],
+          "timestamp": "2026-11-22T21:03:17.304856+00:00",
+          "duration_ms": 0,
+          "elapsed_ms": 1644,
+          "status": "success"
+        },
+        {
+          "step_number": 4,
+          "node_name": "agent",
+          "input": "{\"distance_km\": 10.0, \"time\": \"0:55:00\", \"pace_per_km\": \"5:30\", \"pace_seconds_per_km\": 330.0, \"speed_kmh\": 10.91}",
+          "output": "Ваш темп на 5 км становить 5:00 хв/км, а темп вашого друга на 10 км — 5:30 хв/км. \n\nВи бігли швидше на 30 секунд на кілометр.",
+          "tool_calls": [],
+          "timestamp": "2026-11-22T21:03:19.037173+00:00",
+          "duration_ms": 1731,
+          "elapsed_ms": 3377,
+          "iteration": 2,
+          "total_tokens": 1716
+        },
+        {
+          "step_number": 5,
+          "node_name": "formatter",
+          "input": "Ваш темп на 5 км становить 5:00 хв/км, а темп вашого друга на 10 км — 5:30 хв/км. \n\nВи бігли швидше на 30 секунд на кілометр.",
+          "output": "{\"answer\": \"Ваш темп на 5 км становить 5:00 хв/км, а темп вашого друга на 10 км — 5:30 хв/км. Ви бігли швидше на 30 секунд на кілометр.\", \"confidence\": 1.0, \"sources\": [\"calculate_pace\"]}",
+          "tool_calls": [],
+          "timestamp": "2026-11-22T21:03:20.684499+00:00",
+          "duration_ms": 1646,
+          "elapsed_ms": 5024
+        }
+      ],
+      "stop_reason": null
+    },
+    {
+      "run_id": "TC-003",
+      "query": "Мені 30 років, вага 75 кг, пульс у спокої 60. Нещодавно я пробіг 10 км за 50:00. Хочу пробігти півмарафон: спрогнозуй мій час, скажи потрібний темп, підкажи пульсові зони і порахуй, скільки калорій я спалю за цей забіг.",
+      "started_at": "2026-11-22T21:03:20.685839+00:00",
+      "total_steps": 8,
+      "total_time_ms": 11006,
+      "trajectory": [
+        {
+          "step_number": 1,
+          "node_name": "agent",
+          "input": "Мені 30 років, вага 75 кг, пульс у спокої 60. Нещодавно я пробіг 10 км за 50:00. Хочу пробігти півмарафон: спрогнозуй мій час, скажи потрібний темп, підкажи пульсові зони і порахуй, скільки калорій я спалю за цей забіг.",
+          "output": "tool calls: ['predict_race_time', 'calculate_heart_rate_zones', 'calculate_pace']",
+          "tool_calls": [
+            {
+              "name": "predict_race_time",
+              "args": {
+                "known_distance_km": 10,
+                "known_time": "50:00",
+                "target_distance_km": 21.0975
+              }
+            },
+            {
+              "name": "calculate_heart_rate_zones",
+              "args": {
+                "age": 30,
+                "resting_hr": 60
+              }
+            },
+            {
+              "name": "calculate_pace",
+              "args": {
+                "distance_km": 21.0975,
+                "time": "1:45:00"
+              }
+            }
+          ],
+          "timestamp": "2026-11-22T21:03:23.116205+00:00",
+          "duration_ms": 2420,
+          "elapsed_ms": 2430,
+          "iteration": 1,
+          "total_tokens": 1632
+        },
+        {
+          "step_number": 2,
+          "node_name": "tools",
+          "input": "predict_race_time({'known_distance_km': 10, 'known_time': '50:00', 'target_distance_km': 21.0975})",
+          "output": "{\"known_distance_km\": 10.0, \"known_time\": \"0:50:00\", \"target_distance_km\": 21.0975, \"predicted_time\": \"1:50:19\", \"predicted_time_minutes\": 110.3, \"predicted_pace_per_km\": \"5:14\", \"method\": \"формула Рігеля, показник 1.06\"}",
+          "tool_calls": [
+            {
+              "name": "predict_race_time",
+              "args": {
+                "known_distance_km": 10,
+                "known_time": "50:00",
+                "target_distance_km": 21.0975
+              }
+            }
+          ],
+          "timestamp": "2026-11-22T21:03:23.118305+00:00",
+          "duration_ms": 0,
+          "elapsed_ms": 2432,
+          "status": "success"
+        },
+        {
+          "step_number": 3,
+          "node_name": "tools",
+          "input": "calculate_pace({'distance_km': 21.0975, 'time': '1:45:00'})",
+          "output": "{\"distance_km\": 21.0975, \"time\": \"1:45:00\", \"pace_per_km\": \"4:59\", \"pace_seconds_per_km\": 298.6, \"speed_kmh\": 12.06}",
+          "tool_calls": [
+            {
+              "name": "calculate_pace",
+              "args": {
+                "distance_km": 21.0975,
+                "time": "1:45:00"
+              }
+            }
+          ],
+          "timestamp": "2026-11-22T21:03:23.119207+00:00",
+          "duration_ms": 0,
+          "elapsed_ms": 2433,
+          "status": "success"
+        },
+        {
+          "step_number": 4,
+          "node_name": "tools",
+          "input": "calculate_heart_rate_zones({'age': 30, 'resting_hr': 60})",
+          "output": "{\"age\": 30, \"resting_hr\": 60, \"max_hr\": 190, \"method\": \"Карвонен\", \"zones\": [{\"zone\": 1, \"name\": \"відновлення\", \"min_bpm\": 125, \"max_bpm\": 138}, {\"zone\": 2, \"name\": \"аеробна база\", \"min_bpm\": 138, \"max_bpm\": 151}, {\"zone\": 3, \"name\": \"темпова\", \"min_bpm\": 151, \"max_bpm\": 164}, {\"zone\": 4, \"name\": \"порогова\", \"min_bpm\": 164, \"max_bpm\": 177}, {\"zone\": 5, \"name\": \"максимальна\", \"min_bpm\": 177, \"max_bpm\": 190}]}",
+          "tool_calls": [
+            {
+              "name": "calculate_heart_rate_zones",
+              "args": {
+                "age": 30,
+                "resting_hr": 60
+              }
+            }
+          ],
+          "timestamp": "2026-11-22T21:03:23.119920+00:00",
+          "duration_ms": 0,
+          "elapsed_ms": 2434,
+          "status": "success"
+        },
+        {
+          "step_number": 5,
+          "node_name": "agent",
+          "input": "{\"distance_km\": 21.0975, \"time\": \"1:45:00\", \"pace_per_km\": \"4:59\", \"pace_seconds_per_km\": 298.6, \"speed_kmh\": 12.06}",
+          "output": "tool calls: ['estimate_calories']",
+          "tool_calls": [
+            {
+              "name": "estimate_calories",
+              "args": {
+                "activity": "running",
+                "weight_kg": 75,
+                "duration_minutes": 110
+              }
+            }
+          ],
+          "timestamp": "2026-11-22T21:03:24.258525+00:00",
+          "duration_ms": 1137,
+          "elapsed_ms": 3572,
+          "iteration": 2,
+          "total_tokens": 1997
+        },
+        {
+          "step_number": 6,
+          "node_name": "tools",
+          "input": "estimate_calories({'activity': 'running', 'weight_kg': 75, 'duration_minutes': 110})",
+          "output": "{\"activity\": \"running\", \"weight_kg\": 75.0, \"duration_minutes\": 110.0, \"met\": 9.8, \"calories_kcal\": 1348, \"note\": \"приблизна оцінка за усередненим значенням MET\"}",
+          "tool_calls": [
+            {
+              "name": "estimate_calories",
+              "args": {
+                "activity": "running",
+                "weight_kg": 75,
+                "duration_minutes": 110
+              }
+            }
+          ],
+          "timestamp": "2026-11-22T21:03:24.260213+00:00",
+          "duration_ms": 0,
+          "elapsed_ms": 3574,
+          "status": "success"
+        },
+        {
+          "step_number": 7,
+          "node_name": "agent",
+          "input": "{\"activity\": \"running\", \"weight_kg\": 75.0, \"duration_minutes\": 110.0, \"met\": 9.8, \"calories_kcal\": 1348, \"note\": \"приблизна оцінка за усередненим значенням MET\"}",
+          "output": "Ось результати для вашого півмарафону:\n\n1. **Прогнозований час**: 1 година 50 хвилин 19 секунд (1:50:19).\n2. **Темп**: 5 хвилин 14 секунд на кілометр (5:14).\n3. **Пульсові зони**:\n   - Зона 1 (відновлення): 125 - 138 bpm\n   - Зона 2 (аеробна база): 138 - 151 bpm\n   - Зона 3 (темпова): 151 - 164 bpm\n   - Зона 4 (порогова): 164 - 177 bpm\n   - Зона 5 (максимальна): 177 - 190 bpm\n4. **Калорії, які ви спалите**: приблизно 1348 ккал за забіг.\n\nГотуйтеся до забігу!",
+          "tool_calls": [],
+          "timestamp": "2026-11-22T21:03:27.974396+00:00",
+          "duration_ms": 3713,
+          "elapsed_ms": 7288,
+          "iteration": 3,
+          "total_tokens": 2275
+        },
+        {
+          "step_number": 8,
+          "node_name": "formatter",
+          "input": "Ось результати для вашого півмарафону:\n\n1. **Прогнозований час**: 1 година 50 хвилин 19 секунд (1:50:19).\n2. **Темп**: 5 хвилин 14 секунд на кілометр (5:14).\n3. **Пульсові зони**:\n   - Зона 1 (відновлення): 125 - 138 bpm\n   - Зона 2 (аеробна база): 138 - 151 bpm\n   - Зона 3 (темпова): 151 - 164 bpm\n   - Зона 4 (порогова): 164 - 177 bpm\n   - Зона 5 (максимальна): 177 - 190 bpm\n4. **Калорії, які ви спалите**: приблизно 1348 ккал за забіг.\n\nГотуйтеся до забігу!",
+          "output": "{\"answer\": \"Ось результати для вашого півмарафону:\\n\\n1. **Прогнозований час**: 1 година 50 хвилин 19 секунд (1:50:19).\\n2. **Темп**: 5 хвилин 14 секунд на кілометр (5:14).\\n3. **Пульсові зони**:\\n   - Зона 1 (відновлення): 125 - 138 bpm\\n   - Зона 2 (аеробна база): 138 - 151 bpm\\n   - Зона 3 (темпова): 151 - 164 bpm\\n   - Зона 4 (порогова): 164 - 177 bpm\\n   - Зона 5 (максимальна): 177 - 190 bpm\\n4. **Калорії, які ви спалите**: приблизно 1348 ккал за забіг.\\n\\nГотуйтеся до забігу!\", \"confidence…",
+          "tool_calls": [],
+          "timestamp": "2026-11-22T21:03:31.692475+00:00",
+          "duration_ms": 3717,
+          "elapsed_ms": 11006
+        }
+      ],
+      "stop_reason": null
+    },
+    {
+      "run_id": "TC-004",
+      "query": "Мені 95 років, пульс у спокої 130. Порахуй пульсові зони.",
+      "started_at": "2026-11-22T21:03:31.693929+00:00",
+      "total_steps": 4,
+      "total_time_ms": 4537,
+      "trajectory": [
+        {
+          "step_number": 1,
+          "node_name": "agent",
+          "input": "Мені 95 років, пульс у спокої 130. Порахуй пульсові зони.",
+          "output": "tool calls: ['calculate_heart_rate_zones']",
+          "tool_calls": [
+            {
+              "name": "calculate_heart_rate_zones",
+              "args": {
+                "age": 95,
+                "resting_hr": 130
+              }
+            }
+          ],
+          "timestamp": "2026-11-22T21:03:32.766353+00:00",
+          "duration_ms": 1063,
+          "elapsed_ms": 1072,
+          "iteration": 1,
+          "total_tokens": 1484
+        },
+        {
+          "step_number": 2,
+          "node_name": "tools",
+          "input": "calculate_heart_rate_zones({'age': 95, 'resting_hr': 130})",
+          "output": "Помилка валідації аргументів інструмента 'calculate_heart_rate_zones':\n- resting_hr: Value error, Пульс у спокої має бути від 30 до 120 уд/хв\nЯкщо помилка у форматі — виправ аргументи і повтори виклик. Якщо некоректні дані користувача — поясни йому, що саме не так.",
+          "tool_calls": [
+            {
+              "name": "calculate_heart_rate_zones",
+              "args": {
+                "age": 95,
+                "resting_hr": 130
+              }
+            }
+          ],
+          "timestamp": "2026-11-22T21:03:32.768297+00:00",
+          "duration_ms": 0,
+          "elapsed_ms": 1074,
+          "status": "error"
+        },
+        {
+          "step_number": 3,
+          "node_name": "agent",
+          "input": "Помилка валідації аргументів інструмента 'calculate_heart_rate_zones':\n- resting_hr: Value error, Пульс у спокої має бути від 30 до 120 уд/хв\nЯкщо помилка у форматі — виправ аргументи і повтори виклик. Якщо некоректні дані користувача — поясни йому, що саме не так.",
+          "output": "Пульс у спокої має бути в межах від 30 до 120 ударів за хвилину. Ваше значення (130) перевищує цю межу. Будь ласка, надайте коректний пульс у спокої.",
+          "tool_calls": [],
+          "timestamp": "2026-11-22T21:03:34.545663+00:00",
+          "duration_ms": 1776,
+          "elapsed_ms": 2851,
+          "iteration": 2,
+          "total_tokens": 1643
+        },
+        {
+          "step_number": 4,
+          "node_name": "formatter",
+          "input": "Пульс у спокої має бути в межах від 30 до 120 ударів за хвилину. Ваше значення (130) перевищує цю межу. Будь ласка, надайте коректний пульс у спокої.",
+          "output": "{\"answer\": \"Пульс у спокої має бути в межах від 30 до 120 ударів за хвилину. Ваше значення (130) перевищує цю межу. Будь ласка, надайте коректний пульс у спокої.\", \"confidence\": 0.9, \"sources\": []}",
+          "tool_calls": [],
+          "timestamp": "2026-11-22T21:03:36.231469+00:00",
+          "duration_ms": 1685,
+          "elapsed_ms": 4537
+        }
+      ],
+      "stop_reason": null
+    },
+    {
+      "run_id": "TC-005",
+      "query": "Я пробіг півмарафон за 1:75:00. Який у мене був темп?",
+      "started_at": "2026-11-22T21:03:36.233050+00:00",
+      "total_steps": 4,
+      "total_time_ms": 3585,
+      "trajectory": [
+        {
+          "step_number": 1,
+          "node_name": "agent",
+          "input": "Я пробіг півмарафон за 1:75:00. Який у мене був темп?",
+          "output": "tool calls: ['calculate_pace']",
+          "tool_calls": [
+            {
+              "name": "calculate_pace",
+              "args": {
+                "distance_km": 21.0975,
+                "time": "1:15:00"
+              }
+            }
+          ],
+          "timestamp": "2026-11-22T21:03:37.200580+00:00",
+          "duration_ms": 959,
+          "elapsed_ms": 967,
+          "iteration": 1,
+          "total_tokens": 1486
+        },
+        {
+          "step_number": 2,
+          "node_name": "tools",
+          "input": "calculate_pace({'distance_km': 21.0975, 'time': '1:15:00'})",
+          "output": "{\"distance_km\": 21.0975, \"time\": \"1:15:00\", \"pace_per_km\": \"3:33\", \"pace_seconds_per_km\": 213.3, \"speed_kmh\": 16.88}",
+          "tool_calls": [
+            {
+              "name": "calculate_pace",
+              "args": {
+                "distance_km": 21.0975,
+                "time": "1:15:00"
+              }
+            }
+          ],
+          "timestamp": "2026-11-22T21:03:37.202471+00:00",
+          "duration_ms": 0,
+          "elapsed_ms": 969,
+          "status": "success"
+        },
+        {
+          "step_number": 3,
+          "node_name": "agent",
+          "input": "{\"distance_km\": 21.0975, \"time\": \"1:15:00\", \"pace_per_km\": \"3:33\", \"pace_seconds_per_km\": 213.3, \"speed_kmh\": 16.88}",
+          "output": "Ваш темп під час півмарафону становив 3:33 хв/км, а середня швидкість — 16.88 км/год.",
+          "tool_calls": [],
+          "timestamp": "2026-11-22T21:03:38.594975+00:00",
+          "duration_ms": 1391,
+          "elapsed_ms": 2361,
+          "iteration": 2,
+          "total_tokens": 1586
+        },
+        {
+          "step_number": 4,
+          "node_name": "formatter",
+          "input": "Ваш темп під час півмарафону становив 3:33 хв/км, а середня швидкість — 16.88 км/год.",
+          "output": "{\"answer\": \"Ваш темп під час півмараону становив 3:33 хв/км, а середня швидкість — 16.88 км/год.\", \"confidence\": 0.9, \"sources\": [\"calculate_pace\"]}",
+          "tool_calls": [],
+          "timestamp": "2026-11-22T21:03:39.818435+00:00",
+          "duration_ms": 1222,
+          "elapsed_ms": 3585
+        }
+      ],
+      "stop_reason": null
+    },
+    {
+      "run_id": "DEMO-max-steps",
+      "query": "Я пробіг 10 км за 50:00. Спрогнозуй мій час на півмарафоні і порахуй, скільки калорій я спалю за цей півмарафон при вазі 75 кг.",
+      "started_at": "2026-11-22T21:03:41.596770+00:00",
+      "total_steps": 4,
+      "total_time_ms": 1277,
+      "trajectory": [
+        {
+          "step_number": 1,
+          "node_name": "agent",
+          "input": "Я пробіг 10 км за 50:00. Спрогнозуй мій час на півмарафоні і порахуй, скільки калорій я спалю за цей півмарафон при вазі 75 кг.",
+          "output": "tool calls: ['predict_race_time']",
+          "tool_calls": [
+            {
+              "name": "predict_race_time",
+              "args": {
+                "known_distance_km": 10,
+                "known_time": "50:00",
+                "target_distance_km": 21.0975
+              }
+            }
+          ],
+          "timestamp": "2026-11-22T21:03:42.869148+00:00",
+          "duration_ms": 1258,
+          "elapsed_ms": 1272,
+          "iteration": 1,
+          "total_tokens": 1527
+        },
+        {
+          "step_number": 2,
+          "node_name": "tools",
+          "input": "predict_race_time({'known_distance_km': 10, 'known_time': '50:00', 'target_distance_km': 21.0975})",
+          "output": "{\"known_distance_km\": 10.0, \"known_time\": \"0:50:00\", \"target_distance_km\": 21.0975, \"predicted_time\": \"1:50:19\", \"predicted_time_minutes\": 110.3, \"predicted_pace_per_km\": \"5:14\", \"method\": \"формула Рігеля, показник 1.06\"}",
+          "tool_calls": [
+            {
+              "name": "predict_race_time",
+              "args": {
+                "known_distance_km": 10,
+                "known_time": "50:00",
+                "target_distance_km": 21.0975
+              }
+            }
+          ],
+          "timestamp": "2026-11-22T21:03:42.872245+00:00",
+          "duration_ms": 1,
+          "elapsed_ms": 1275,
+          "status": "success"
+        },
+        {
+          "step_number": 3,
+          "node_name": "guard",
+          "input": "перевірка перед кроком 2",
+          "output": "Досягнуто ліміт кроків (1).",
+          "tool_calls": [],
+          "timestamp": "2026-11-22T21:03:42.872901+00:00",
+          "duration_ms": 0,
+          "elapsed_ms": 1276,
+          "iteration": 1,
+          "stop_reason": "max_steps"
+        },
+        {
+          "step_number": 4,
+          "node_name": "guard_finalize",
+          "input": "max_steps",
+          "output": "{\"answer\": \"Досягнуто ліміт кроків (1). Часткова відповідь — дані, які вдалося зібрати до зупинки:\\n- predict_race_time({'known_distance_km': 10, 'known_time': '50:00', 'target_distance_km': 21.0975}): {\\\"known_distance_km\\\": 10.0, \\\"known_time\\\": \\\"0:50:00\\\", \\\"target_distance_km\\\": 21.0975, \\\"predicted_time\\\": \\\"1:50:19\\\", \\\"predicted_time_minutes\\\": 110.3, \\\"predicted_pace_per_km\\\": \\\"5:14\\\", \\\"method\\\": \\\"формула Рігеля, показник 1.06\\\"}\", \"confidence\": 0.3, \"sources\": [\"predict_race_time\"]}",
+          "tool_calls": [],
+          "timestamp": "2026-11-22T21:03:42.873492+00:00",
+          "duration_ms": 0,
+          "elapsed_ms": 1276,
+          "stop_reason": "max_steps"
+        }
+      ],
+      "stop_reason": "max_steps"
+    },
+    {
+      "run_id": "DEMO-timeout",
+      "query": "Я пробіг 10 км за 50:00. Який у мене був темп?",
+      "started_at": "2026-11-22T21:03:42.876168+00:00",
+      "total_steps": 4,
+      "total_time_ms": 4066,
+      "trajectory": [
+        {
+          "step_number": 1,
+          "node_name": "agent",
+          "input": "Я пробіг 10 км за 50:00. Який у мене був темп?",
+          "output": "tool calls: ['calculate_pace']",
+          "tool_calls": [
+            {
+              "name": "calculate_pace",
+              "args": {
+                "distance_km": 10,
+                "time": "50:00"
+              }
+            }
+          ],
+          "timestamp": "2026-11-22T21:03:43.932950+00:00",
+          "duration_ms": 1045,
+          "elapsed_ms": 1056,
+          "iteration": 1,
+          "total_tokens": 1477
+        },
+        {
+          "step_number": 2,
+          "node_name": "tools",
+          "input": "calculate_pace({'distance_km': 10, 'time': '50:00'})",
+          "output": "{\"distance_km\": 10.0, \"time\": \"0:50:00\", \"pace_per_km\": \"5:00\", \"pace_seconds_per_km\": 300.0, \"speed_kmh\": 12.0}",
+          "tool_calls": [
+            {
+              "name": "calculate_pace",
+              "args": {
+                "distance_km": 10,
+                "time": "50:00"
+              }
+            }
+          ],
+          "timestamp": "2026-11-22T21:03:46.940888+00:00",
+          "duration_ms": 3006,
+          "elapsed_ms": 4064,
+          "status": "success"
+        },
+        {
+          "step_number": 3,
+          "node_name": "guard",
+          "input": "перевірка перед кроком 2",
+          "output": "Перевищено тайм-аут: минуло 4.1 с за ліміту 2 с.",
+          "tool_calls": [],
+          "timestamp": "2026-11-22T21:03:46.941921+00:00",
+          "duration_ms": 0,
+          "elapsed_ms": 4065,
+          "iteration": 1,
+          "stop_reason": "timeout"
+        },
+        {
+          "step_number": 4,
+          "node_name": "guard_finalize",
+          "input": "timeout",
+          "output": "{\"answer\": \"Перевищено тайм-аут: минуло 4.1 с за ліміту 2 с. Часткова відповідь — дані, які вдалося зібрати до зупинки:\\n- calculate_pace({'distance_km': 10, 'time': '50:00'}): {\\\"distance_km\\\": 10.0, \\\"time\\\": \\\"0:50:00\\\", \\\"pace_per_km\\\": \\\"5:00\\\", \\\"pace_seconds_per_km\\\": 300.0, \\\"speed_kmh\\\": 12.0}\", \"confidence\": 0.3, \"sources\": [\"calculate_pace\"]}",
+          "tool_calls": [],
+          "timestamp": "2026-11-22T21:03:46.942775+00:00",
+          "duration_ms": 0,
+          "elapsed_ms": 4066,
+          "stop_reason": "timeout"
+        }
+      ],
+      "stop_reason": "timeout"
+    },
+    {
+      "run_id": "DEMO-loop",
+      "query": "Я пробіг 10 км за 50:00. Який у мене був темп?",
+      "started_at": "2026-11-22T21:03:46.943244+00:00",
+      "total_steps": 7,
+      "total_time_ms": 13,
+      "trajectory": [
+        {
+          "step_number": 1,
+          "node_name": "agent",
+          "input": "Я пробіг 10 км за 50:00. Який у мене був темп?",
+          "output": "tool calls: ['calculate_pace']",
+          "tool_calls": [
+            {
+              "name": "calculate_pace",
+              "args": {
+                "distance_km": 10,
+                "time": "50:00"
+              }
+            }
+          ],
+          "timestamp": "2026-11-22T21:03:46.951819+00:00",
+          "duration_ms": 0,
+          "elapsed_ms": 8,
+          "iteration": 1,
+          "total_tokens": null
+        },
+        {
+          "step_number": 2,
+          "node_name": "tools",
+          "input": "calculate_pace({'distance_km': 10, 'time': '50:00'})",
+          "output": "{\"distance_km\": 10.0, \"time\": \"0:50:00\", \"pace_per_km\": \"5:00\", \"pace_seconds_per_km\": 300.0, \"speed_kmh\": 12.0}",
+          "tool_calls": [
+            {
+              "name": "calculate_pace",
+              "args": {
+                "distance_km": 10,
+                "time": "50:00"
+              }
+            }
+          ],
+          "timestamp": "2026-11-22T21:03:46.953258+00:00",
+          "duration_ms": 0,
+          "elapsed_ms": 10,
+          "status": "success"
+        },
+        {
+          "step_number": 3,
+          "node_name": "agent",
+          "input": "{\"distance_km\": 10.0, \"time\": \"0:50:00\", \"pace_per_km\": \"5:00\", \"pace_seconds_per_km\": 300.0, \"speed_kmh\": 12.0}",
+          "output": "tool calls: ['calculate_pace']",
+          "tool_calls": [
+            {
+              "name": "calculate_pace",
+              "args": {
+                "distance_km": 10,
+                "time": "50:00"
+              }
+            }
+          ],
+          "timestamp": "2026-11-22T21:03:46.953853+00:00",
+          "duration_ms": 0,
+          "elapsed_ms": 10,
+          "iteration": 2,
+          "total_tokens": null
+        },
+        {
+          "step_number": 4,
+          "node_name": "tools",
+          "input": "calculate_pace({'distance_km': 10, 'time': '50:00'})",
+          "output": "{\"distance_km\": 10.0, \"time\": \"0:50:00\", \"pace_per_km\": \"5:00\", \"pace_seconds_per_km\": 300.0, \"speed_kmh\": 12.0}",
+          "tool_calls": [
+            {
+              "name": "calculate_pace",
+              "args": {
+                "distance_km": 10,
+                "time": "50:00"
+              }
+            }
+          ],
+          "timestamp": "2026-11-22T21:03:46.955128+00:00",
+          "duration_ms": 0,
+          "elapsed_ms": 11,
+          "status": "success"
+        },
+        {
+          "step_number": 5,
+          "node_name": "agent",
+          "input": "{\"distance_km\": 10.0, \"time\": \"0:50:00\", \"pace_per_km\": \"5:00\", \"pace_seconds_per_km\": 300.0, \"speed_kmh\": 12.0}",
+          "output": "tool calls: ['calculate_pace']",
+          "tool_calls": [
+            {
+              "name": "calculate_pace",
+              "args": {
+                "distance_km": 10,
+                "time": "50:00"
+              }
+            }
+          ],
+          "timestamp": "2026-11-22T21:03:46.955657+00:00",
+          "duration_ms": 0,
+          "elapsed_ms": 12,
+          "iteration": 3,
+          "total_tokens": null
+        },
+        {
+          "step_number": 6,
+          "node_name": "guard",
+          "input": "tool calls: [{'name': 'calculate_pace', 'args': {'distance_km': 10, 'time': '50:00'}}]",
+          "output": "Виявлено зациклення: інструмент 'calculate_pace' викликано 3 рази поспіль з однаковими аргументами.",
+          "tool_calls": [
+            {
+              "name": "calculate_pace",
+              "args": {
+                "distance_km": 10,
+                "time": "50:00"
+              }
+            }
+          ],
+          "timestamp": "2026-11-22T21:03:46.955703+00:00",
+          "duration_ms": 0,
+          "elapsed_ms": 12,
+          "iteration": 3,
+          "stop_reason": "loop_detected"
+        },
+        {
+          "step_number": 7,
+          "node_name": "guard_finalize",
+          "input": "loop_detected",
+          "output": "{\"answer\": \"Виявлено зациклення: інструмент 'calculate_pace' викликано 3 рази поспіль з однаковими аргументами. Часткова відповідь — дані, які вдалося зібрати до зупинки:\\n- calculate_pace({'distance_km': 10, 'time': '50:00'}): {\\\"distance_km\\\": 10.0, \\\"time\\\": \\\"0:50:00\\\", \\\"pace_per_km\\\": \\\"5:00\\\", \\\"pace_seconds_per_km\\\": 300.0, \\\"speed_kmh\\\": 12.0}\\n- calculate_pace({'distance_km': 10, 'time': '50:00'}): {\\\"distance_km\\\": 10.0, \\\"time\\\": \\\"0:50:00\\\", \\\"pace_per_km\\\": \\\"5:00\\\", \\\"pace_seconds…",
+          "tool_calls": [],
+          "timestamp": "2026-11-22T21:03:46.956217+00:00",
+          "duration_ms": 0,
+          "elapsed_ms": 12,
+          "stop_reason": "loop_detected"
+        }
+      ],
+      "stop_reason": "loop_detected"
+    }
+  ]
+}
